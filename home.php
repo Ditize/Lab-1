@@ -18,14 +18,14 @@
     <div class="container px-4 px-lg-5 mt-5">
     <div class="row gx-4 gx-lg-5 row-cols-md-3 row-cols-xl-4 justify-content-center">
     <?php 
-    $products = $conn->query("SELECT * FROM 'products' where status = 1 order by rand() limit 8");
+    $products = $conn->query("SELECT * FROM `products` where status = 1 order by rand() limit 8 ");
     while ($row = $products->fetch_assoc()):
         $upload_path = base_app. '/uploads/product_'.$row['id'];
         $img = "";
       if(is_dir($upload_path)){
         $fileO = scandir($upload_path);
       if(isset($fileO[2]))
-        img = "/uploads/product_".$row['id']."/".fileO[2]; 
+        $img = "uploads/product_".$row['id']."/".$fileO[2]; 
         // var_dump($fileO);
       }
       foreach($row as $k=> $v){
@@ -52,7 +52,7 @@
                         <span><strong>Price:</strong> <?php echo $v ?></span>
                     <?php endforeach; ?>
                 </div>
-                <p class="m-0"><small>By: <?php echp $row['author'] ?></small></p>
+                <p class="m-0"><small>By: <?php echo $row['author'] ?></small></p>
             </div>
             <!-- PRODUCT ACTIONS -->
             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
