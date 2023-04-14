@@ -29,3 +29,47 @@
                           if($sub_qry->num_rows <= 0):
                         ?>
                         <li class="nav-item"><a class="nav-link" aria-current="page" href="./?p=products&c=<?php echo md5($crow['id']) ?>"><?php echo $crow['category'] ?></a></li>
+                        <?php else: ?>
+                        <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" id="navbarDropdown<?php echo $crow['id'] ?>" href="#" role="button" data-toggle="dropdown" aria-expanded="false"><?php echo $crow['category'] ?></a></a>
+                            <ul class="dropdown-menu  p-0" aria-labelledby="navbarDropdown<?php echo $crow['id'] ?>">
+                              <?php while($srow = $sub_qry->fetch_assoc()): ?>
+                                <li><a class="dropdown-item border-bottom" href="./?p=products&c=<?php echo md5($crow['id']) ?>&s=<?php echo md5($srow['id']) ?>"><?php echo $srow['sub_category'] ?></a></li>
+                        
+                      <?php endwhile; ?>
+                            </ul>
+                        </li>
+                        <?php endif; ?>
+                        <?php endwhile; ?>
+                        <?php if($count_cats > 3): ?>
+                        <li class="nav-item"><a class="nav-link" href="./?p=view_categories">All Categories</a></li>
+                        <?php endif; ?>
+                        <li class="nav-item"><a class="nav-link" href="./?p=about">About</a></li>
+                    </ul>
+                    <div class="d-flex align-items-center">
+                      <?php if(!isset($_SESSION['userdata']['id'])): ?>
+                        <button class="btn btn-outline-dark ml-2" id="login-btn" type="button">Login</button>
+                        <?php else: ?>
+                        <a class="text-dark mr-2 nav-link" href="./?p=cart">
+                            <i class="bi-cart-fill me-1"></i>
+                            Cart
+                            <span class="badge bg-dark text-white ms-1 rounded-pill" id="cart-count">
+                              <?php 
+                              if(isset($_SESSION['userdata']['id'])):
+                                $count = $conn->query("SELECT SUM(quantity) as items from `cart` where client_id =".$_settings->userdata('id'))->fetch_assoc()['items'];
+                                echo ($count > 0 ? $count : 0);
+                              else:
+                                echo "0";
+                              endif;
+                              ?>
+                            </span>
+                        </a>
+                        
+                            <a href="./?p=my_account" class="text-dark  nav-link"><b> Hi, <?php echo $_settings->userdata('firstname')?>!</b></a>
+                            <a href="logout.php" class="text-dark  nav-link"><i class="fa fa-sign-out-alt"></i></a>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </nav>
+<script>
