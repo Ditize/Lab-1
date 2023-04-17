@@ -1,5 +1,5 @@
 <?php
-ob_strat();
+ob_start();
 session_start();
 
 require_once('initialize.php');
