@@ -87,3 +87,38 @@
     <!-- daterangepicker -->
     <script src="<?php echo base_url ?>plugins/moment/moment.min.js"></script>
     <script src="<?php echo base_url ?>plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="<?php echo base_url ?>plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Summernote -->
+    <script src="<?php echo base_url ?>plugins/summernote/summernote-bs4.min.js"></script>
+    <script src="<?php echo base_url ?>plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?php echo base_url ?>plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="<?php echo base_url ?>plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="<?php echo base_url ?>plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <!-- overlayScrollbars -->
+    <!-- <script src="<?php echo base_url ?>plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script> -->
+    <!-- AdminLTE App -->
+    <script src="<?php echo base_url ?>dist/js/adminlte.js"></script>
+    <div class="daterangepicker ltr show-ranges opensright">
+      <div class="ranges">
+        <ul>
+          <li data-range-key="Today">Today</li>
+          <li data-range-key="Yesterday">Yesterday</li>
+          <li data-range-key="Last 7 Days">Last 7 Days</li>
+          <li data-range-key="Last 30 Days">Last 30 Days</li>
+          <li data-range-key="This Month">This Month</li>
+          <li data-range-key="Last Month">Last Month</li>
+          <li data-range-key="Custom Range">Custom Range</li>
+        </ul>
+      </div>
+      <div class="drp-calendar left">
+        <div class="calendar-table"></div>
+        <div class="calendar-time" style="display: none;"></div>
+      </div>
+      <div class="drp-calendar right">
+        <div class="calendar-table"></div>
+        <div class="calendar-time" style="display: none;"></div>
+      </div>
+      <div class="drp-buttons"><span class="drp-selected"></span><button class="cancelBtn btn btn-sm btn-default" type="button">Cancel</button><button class="applyBtn btn btn-sm btn-primary" disabled="disabled" type="button">Apply</button> </div>
+    </div>
+    <div class="jqvmap-label" style="display: none; left: 1093.83px; top: 394.361px;">Idaho</div>
