@@ -57,3 +57,33 @@
     }
   })
 </script>
+
+<!-- FOOTER-->
+<footer class="py-5 bg-dark">
+            <div class="container">
+              <p class="m-0 text-center text-white">Copyright &copy; <?php echo $_settings->info('short_name') ?> 2023</p>
+              <p class="m-0 text-center text-white">Developed By: <a href="mailto:Libary@gmail.com">Libray</a></p>
+          </div>
+        </footer>
+
+   
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+      $.widget.bridge('uibutton', $.ui.button)
+    </script>
+    <!-- Bootstrap 4 -->
+    <script src="<?php echo base_url ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- ChartJS -->
+    <script src="<?php echo base_url ?>plugins/chart.js/Chart.min.js"></script>
+    <!-- Sparkline -->
+    <script src="<?php echo base_url ?>plugins/sparklines/sparkline.js"></script>
+    <!-- Select2 -->
+    <script src="<?php echo base_url ?>plugins/select2/js/select2.full.min.js"></script>
+    <!-- JQVMap -->
+    <script src="<?php echo base_url ?>plugins/jqvmap/jquery.vmap.min.js"></script>
+    <script src="<?php echo base_url ?>plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="<?php echo base_url ?>plugins/jquery-knob/jquery.knob.min.js"></script>
+    <!-- daterangepicker -->
+    <script src="<?php echo base_url ?>plugins/moment/moment.min.js"></script>
+    <script src="<?php echo base_url ?>plugins/daterangepicker/daterangepicker.js"></script>
