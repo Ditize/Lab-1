@@ -74,7 +74,34 @@ function update_settings_info(){
 		}
 	}
 
-
+    function set_userdata($field='',$value=''){
+		if(!empty($field) && !empty($value)){
+			$_SESSION['userdata'][$field]= $value;
+		}
+	}
+	function userdata($field = ''){
+		if(!empty($field)){
+			if(isset($_SESSION['userdata'][$field]))
+				return $_SESSION['userdata'][$field];
+			else
+				return null;
+		}else{
+			return false;
+		}
+	}
+	function set_flashdata($flash='',$value=''){
+		if(!empty($flash) && !empty($value)){
+			$_SESSION['flashdata'][$flash]= $value;
+		return true;
+		}
+	}
+	function chk_flashdata($flash = ''){
+		if(isset($_SESSION['flashdata'][$flash])){
+			return true;
+		}else{
+			return false;
+		}
+	}
 
 
 
