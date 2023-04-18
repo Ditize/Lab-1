@@ -104,8 +104,42 @@ function update_settings_info(){
 	}
 
 
-
-
-
+	function sess_des(){
+		if(isset($_SESSION['userdata'])){
+				unset($_SESSION['userdata']);
+			return true;
+		}
+			return true;
+	}
+	function info($field=''){
+		if(!empty($field)){
+			if(isset($_SESSION['system_info'][$field]))
+				return $_SESSION['system_info'][$field];
+			else
+				return false;
+		}else{
+			return false;
+		}
+	}
+	function set_info($field='',$value=''){
+		if(!empty($field) && !empty($value)){
+			$_SESSION['system_info'][$field] = $value;
+		}
+	}
+}
+$_settings = new SystemSettings();
+$_settings->load_system_info();
+$action = !isset($_GET['f']) ? 'none' : strtolower($_GET['f']);
+$sysset = new SystemSettings();
+switch ($action) {
+	case 'update_settings':
+		echo $sysset->update_settings_info();
+		break;
+	default:
+		// echo $sysset->index();
+		break;
 }
 ?>
+
+
+
