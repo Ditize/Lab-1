@@ -38,10 +38,26 @@ class Login extends DBConnection {
                 redirect('admin/login.php');
             }
         }
-        function login_user(){
+        function login_user()
             extract($_POST);
             $qry = $this->conn->query("SELECT * from clients where email = '$email' and password = md5('$password') ");
-            if($qry->num_rows > 0){
+            if($qry->num_rows > 0)
                 foreach($qry->fetch_array() as $k => $v){
                     $this->settings->set_userdata($k,$v);
                 }
+                $action = !isset($_GET['f']) ? 'none' : strtolower($_GET['f']);
+$auth = new Login();
+switch ($action) {
+	case 'login':
+		echo $auth->login();
+		break;
+	case 'login_user':
+		echo $auth->login_user();
+		break;
+	case 'logout':
+		echo $auth->logout();
+		break;
+	default:
+		echo $auth->index();
+		break;
+}
