@@ -67,6 +67,16 @@ Class Users extends DBConnection {
         
     }
 }
+public function delete_users(){
+    extract($_POST);
+    $qry = $this->conn->query("DELETE FROM users where id = $id");
+    if($qry){
+        $this->settings->set_flashdata('success','User Details successfully deleted.');
+        return 1;
+    }else{
+        return false;
+    }
+}
   public function save_fusers(){
     extract($_POST);
     $data = "";
@@ -76,5 +86,36 @@ Class Users extends DBConnection {
             $data .= " `{$k}` = '{$v}' ";
         }
     }
-  }
+
+    if(!empty($password))
+    $data .= ", `password` = '".md5($password)."' ";
+
+    if(isset($_FILES['img']) && $_FILES['img']['tmp_name'] != ''){
+        $fname = 'uploads/'.strtotime(date('y-m-d H:i')).'_'.$_FILES['img']['name'];
+        $move = move_uploaded_file($_FILES['img']['tmp_name'],'../'. $fname);
+        if($move){
+            $data .=" , avatar = '{$fname}' ";
+            if(isset($_SESSION['userdata']['avatar']) && is_file('../'.$_SESSION['userdata']['avatar']))
+                unlink('../'.$_SESSION['userdata']['avatar']);
+        }
+    }
+    $slq = "UPDATE faculty set{$data} where id =$id";
+    $save = $this ->conn->query($slq);
+
+    if($save){
+        $this->settings->set_flashdata('success','User Details successfully updated.');
+        foreach($_POST as $k => $v){
+            if(!in_array($k,array('id','password'))){
+                if(!empty($data)) $data .=" , ";
+                $this->settings->set_userdata($k,$v);
+            }
+        }
+        if(isset($fname) && isset($move))
+        $this->settings->set_userdata('avatar',$fname);
+        return 1;
+        }else{
+            $resp['error'] = $sql;
+            return json_encode($resp);
+        }
+   } 
 }
