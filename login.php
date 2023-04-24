@@ -32,3 +32,15 @@
     </div>
 </div>
 <script>
+     $(function(){
+        $('#create_account').click(function(){
+            uni_modal("","registration.php","mid-large")
+        })
+        $('#login-form').submit(function(e){
+            e.preventDefault();
+            start_loader()
+            if($('.err-msg').length > 0)
+                $('.err-msg').remove();
+                })
+                })
+        </script>
