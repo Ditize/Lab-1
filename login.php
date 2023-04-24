@@ -41,6 +41,19 @@
             start_loader()
             if($('.err-msg').length > 0)
                 $('.err-msg').remove();
+
+                $.ajax({
+                url:_base_url_+"classes/Login.php?f=login_user",
+                method:"POST",
+                data:$(this).serialize(),
+                dataType:"json",
+                error:err=>{
+                    console.log(err)
+                    alert_toast("an error occured",'error')
+                    end_loader()
+                }
+                    
+                },
                 })
                 })
         </script>
