@@ -136,3 +136,30 @@ elseif(isset($_GET['s'])){
                         </div>
                     </div>
                     <?php endwhile; ?>
+                    <?php 
+                            if($products->num_rows <= 0){
+                                echo "<h4 class='text-center'><b>No Product Listed.</b></h4>";
+                            }
+                        ?>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="details">
+                    <h3 class="text-center"><?php echo $title. " Category" ?></h3>
+                    <hr>
+                    <div>
+                        <?php echo isset($cat_description) ? stripslashes(html_entity_decode($cat_description)) : '' ?>
+                    </div>
+                    <h3 class="text-center"><?php echo $sub_title?></h3>
+                    <hr>
+                    <div>
+                        <?php echo isset($sub_cat_description) ? stripslashes(html_entity_decode($sub_cat_description)) : '' ?>
+                    </div>
+                </div>
+            </div>
+                
+            
+
+        </div>
+     </div>
+  </div>
+</section>
