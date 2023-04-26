@@ -58,4 +58,23 @@ elseif(isset($_GET['s'])){
             </div>
             <hr>
         </div>
-        
+        <?php endif; ?>
+        <div class="<?php echo isset($_GET['c'])? 'col-md-9': 'col-md-10 offset-md-1' ?>">
+            <div class="container-fluid p-0">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="book-tab" data-toggle="tab" href="#book" role="tab" aria-controls="book" aria-selected="true">Books</a>
+                </li>
+                <?php if(isset($_GET['c'])): ?>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="details-tab" data-toggle="tab" href="#details" role="tab" aria-controls="details" aria-selected="false">Details</a>
+                </li>
+                <?php endif; ?>
+            </ul>
+            <div class="tab-content pt-2">
+                <div class="tab-pane fade show active" id="book">
+                    <?php 
+                            if(isset($_GET['search'])){
+                                echo "<h4 class='text-center'><b>Search Result for '".$_GET['search']."'</b></h4>";
+                            }
+                        ?>
