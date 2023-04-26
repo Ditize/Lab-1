@@ -16,3 +16,27 @@
         </h3>
             <hr>
         </div>
+        <div class="row  align-items-center h-100">
+            
+            <div class="col-lg-5 border-right">
+                
+                <div class="form-group">
+                    <label for="" class="control-label">Firstname</label>
+                    <input type="text" class="form-control form-control-sm form" name="firstname" required>
+                </div>
+                <div class="form-group">
+                    <label for="" class="control-label">Lastname</label>
+                    <input type="text" class="form-control form-control-sm form" name="lastname" required>
+                </div>
+                <div class="form-group">
+                    <label for="" class="control-label">Contact</label>
+                    <input type="text" class="form-control form-control-sm form" name="contact" required>
+                </div>
+                <div class="form-group">
+                    <label for="" class="control-label">Gender</label>
+                    <select name="gender" id="" class="custom-select select" required>
+                        <option>Male</option>
+                        <option>Female</option>
+                    </select>
+                </div>
+            </div>
