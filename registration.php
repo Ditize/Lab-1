@@ -40,3 +40,15 @@
                     </select>
                 </div>
             </div>
+            <div class="col-lg-7">
+                <div class="form-group">
+                    <label for="" class="control-label">Default Delivery Address</label>
+                    <textarea class="form-control form" rows='3' name="default_delivery_address"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="" class="control-label">Email</label>
+                    <input type="text" class="form-control form-control-sm form" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="" class="control-label">Password</label>
+                    <input type="password" class="form-control form-control-sm form" name="password" required>
