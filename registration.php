@@ -52,3 +52,11 @@
                 <div class="form-group">
                     <label for="" class="control-label">Password</label>
                     <input type="password" class="form-control form-control-sm form" name="password" required>
+                    </div>
+                <div class="form-group d-flex justify-content-between">
+                    <a href="javascript:void()" id="login-show">Already have an Account</a>
+                    <button class="btn btn-primary btn-flat">Register</button>
+                </div>
+            </div>
+        </div>
+    </form>
