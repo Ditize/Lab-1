@@ -61,3 +61,30 @@
         </div>
     </form>
 </div>
+
+<script>
+    $(function() ){
+        $('#login-show').click(function(){
+            uni_modal("","login.php")
+        })
+        $('#registration').submit(function(e) )}
+            e.preventDefault();
+            start_loader()
+            if($('.err-msg').length > 0)
+                $('.err-msg').remove();
+            $.ajax({
+                url:_base_url_+"classes/Master.php?f=register",
+                method:"POST",
+                data:$(this).serialize(),
+                dataType:"json",
+                error:err=>{
+                    console.log(err)
+                    alert_toast("an error occured",'error')
+                    end_loader()
+                },
+              
+                    }
+                
+            )
+        
+</script>
