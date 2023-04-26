@@ -78,4 +78,3 @@ elseif(isset($_GET['s'])){
                                 echo "<h4 class='text-center'><b>Search Result for '".$_GET['search']."'</b></h4>";
                             }
                         ?>
-                    
