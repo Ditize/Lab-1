@@ -24,4 +24,11 @@
                                 <th>Order Status</th>
                             </tr>
                         </thead>
+                        <tbody>
+                            <?php 
+                                $i = 1;
+                                $qry = $conn->query("SELECT o.*,concat(c.firstname,' ',c.lastname) as client from `orders` o inner join
+                                 clients c on c.id = o.client_id where o.client_id = '".$_settings->userdata('id')."' order by unix_timestamp(o.date_created) desc ");
+                                while($row = $qry->fetch_assoc()):
+                            ?>
  </section>
