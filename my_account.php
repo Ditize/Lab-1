@@ -27,8 +27,7 @@
                         <tbody>
                             <?php 
                                 $i = 1;
-                                $qry = $conn->query("SELECT o.*,concat(c.firstname,' ',c.lastname) as client from `orders` o inner join
-                                 clients c on c.id = o.client_id where o.client_id = '".$_settings->userdata('id')."' order by unix_timestamp(o.date_created) desc ");
+                                $qry = $conn->query("SELECT o.*,concat(c.firstname,' ',c.lastname) as client from `orders` o inner join clients c on c.id = o.client_id where o.client_id = '".$_settings->userdata('id')."' order by unix_timestamp(o.date_created) desc ");
                                 while($row = $qry->fetch_assoc()):
                             ?>
                                 <tr>
@@ -50,13 +49,14 @@
                                             <?php endif; ?>
                                         </td>
                                     </tr>
-                                    <?php endwhile; ?>
+                            <?php endwhile; ?>
                         </tbody>
                     </table>
             </div>
         </div>
     </div>
-    <script>
+</section>
+<script>
     function cancel_book($id){
         start_loader()
         $.ajax({
@@ -83,4 +83,11 @@
             }
         })
     }
- </section>
+    $(function(){
+        $('.view_order').click(function(){
+            uni_modal("Order Details","./admin/orders/view_order.php?view=user&id="+$(this).attr('data-id'),'large')
+        })
+        $('table').dataTable();
+
+    })
+</script>
