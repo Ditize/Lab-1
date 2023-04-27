@@ -15,4 +15,13 @@
                             <col width="25">
                             <col width="15">
                         </colgroup>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>DateTime</th>
+                                <th>Transaction ID</th>
+                                <th>Amount</th>
+                                <th>Order Status</th>
+                            </tr>
+                        </thead>
  </section>
