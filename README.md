@@ -16,28 +16,27 @@ Admin Panel User Panel
 Features:
 
 Admin Side:
-Secure Login
-Dashboard Page
-Manage Category List
-Manage Sub-Category List
-Manage Book List
-Manage Inventory
-Manage Order List
-View Sales Report
-Manage System Information
-Manage Account
+1.Dashboard Page
+2.Manage Category List
+3.Manage Sub-Category List
+4.Manage Book List
+5.Manage Inventory
+6.Manage Order List
+7.View Sales Report
+8.Manage System Information
+9.Manage Account
 
 Client/Customer Side:
-Secure Login and Registration
-Explore Books
-Search Books
-View Book's Information
-Add Book to Cart
-View Cart List
-Manage Cart
-Checkout
-Place Order
-Pay Online
+1.Secure Login and Registration
+2.Explore Books
+3.Search Books
+4.View Book's Information
+5.Add Book to Cart
+6.View Cart List
+7.Manage Cart
+8.Checkout
+9.Place Order
+10.Pay Online
 
 Për krijimin e një perfeksioni te mirë dhe funksionalizimin e ketij web-aplikacioni Online- BookStore ne do referohemi në perdorimin e disa gjuheve programuese për ketë web-aplikacion. Gjuhë programuese keto të përdorura në masë të gjerë nga zhvilluesit për ndertimin e aplikacioneve aktuale dhe moderne.
 HTML - do të përdoret për krijimin e struktures së faqës dhe për të shtuar elemente të ndryshme si tekst, imazhe, video etj.
