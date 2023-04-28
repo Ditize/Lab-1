@@ -13,14 +13,30 @@ Po ashtu ne si grup kemi arritur qe deri tani ta hapim Git-Hub, Trello si dhe te
 Karakteristikat dhe funksionaliteti i roleve:
 Admin Panel User Panel
 
-1. Admin Login 1. Home Page - user can see all the books
-2. Dashboard - Can see statistics 2. Register Account - user can create account
-3. Add/View/Update/Delete Categories 3. User Login
-4. Add/View/Update/Delete Books 4. Category - user can filter book with category
-5. View Users 5. User can view book
-6. Track Orders 6. Add to Cart
-7. Update Profile 7. Dashboard
-8. Logout 8. My Orders
+Features:
+
+Admin Side:
+1.Dashboard Page
+2.Manage Category List
+3.Manage Sub-Category List
+4.Manage Book List
+5.Manage Inventory
+6.Manage Order List
+7.View Sales Report
+8.Manage System Information
+9.Manage Account
+
+Client/Customer Side:
+1.Secure Login and Registration
+2.Explore Books
+3.Search Books
+4.View Book's Information
+5.Add Book to Cart
+6.View Cart List
+7.Manage Cart
+8.Checkout
+9.Place Order
+10.Pay Online
 
 Për krijimin e një perfeksioni te mirë dhe funksionalizimin e ketij web-aplikacioni Online- BookStore ne do referohemi në perdorimin e disa gjuheve programuese për ketë web-aplikacion. Gjuhë programuese keto të përdorura në masë të gjerë nga zhvilluesit për ndertimin e aplikacioneve aktuale dhe moderne.
 HTML - do të përdoret për krijimin e struktures së faqës dhe për të shtuar elemente të ndryshme si tekst, imazhe, video etj.
