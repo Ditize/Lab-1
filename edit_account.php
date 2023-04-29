@@ -54,3 +54,48 @@
         </div>
     </div>
 </section>
+<script>
+$(function(){
+        $('#update_account [name="password"],#update_account [name="cpassword"]').on('input',function(){
+            if($('#update_account [name="password"]').val() != '' || $('#update_account [name="cpassword"]').val() != '')
+            $('#update_account [name="password"],#update_account [name="cpassword"]').attr('required',true);
+            else
+            $('#update_account [name="password"],#update_account [name="cpassword"]').attr('required',false);
+        })
+        $('#update_account').submit(function(e){
+            e.preventDefault();
+            start_loader()
+            if($('.err-msg').length > 0)
+                $('.err-msg').remove();
+            $.ajax({
+                url:_base_url_+"classes/Master.php?f=update_account",
+                method:"POST",
+                data:$(this).serialize(),
+                dataType:"json",
+                error:err=>{
+                    console.log(err)
+                    alert_toast("an error occured",'error')
+                    end_loader()
+                },
+                success:function(resp){
+                    if(typeof resp == 'object' && resp.status == 'success'){
+                        alert_toast("Account succesfully updated",'success');
+                        $('#update_account [name="password"],#update_account [name="cpassword"]').attr('required',false);
+                        $('#update_account [name="password"],#update_account [name="cpassword"]').val('');
+                    }else if(resp.status == 'failed' && !!resp.msg){
+                        var _err_el = $('<div>')
+                            _err_el.addClass("alert alert-danger err-msg").text(resp.msg)
+                        $('#update_account').prepend(_err_el)
+                        $('body, html').animate({scrollTop:0},'fast')
+                        end_loader()
+                        
+                    }else{
+                        console.log(resp)
+                        alert_toast("an error occured",'error')
+                    }
+                    end_loader()
+                }
+            })
+        })
+    })
+</script>
