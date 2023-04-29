@@ -29,3 +29,28 @@
                                     <option <?php echo $_settings->userdata('gender') == "Female" ? "selected" : '' ?>>Female</option>
                                 </select>
                             </div>
+                            <div class="form-group">
+                                <label for="" class="control-label">Default Delivery Address</label>
+                                <textarea class="form-control form" rows='3' name="default_delivery_address"><?php echo $_settings->userdata('default_delivery_address') ?></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="control-label">Email</label>
+                                <input type="text" name="email" class="form-control form" value="<?php echo $_settings->userdata('email') ?>" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="control-label">New Password</label>
+                                <input type="password" name="password" class="form-control form" value="" placeholder="(Enter value to change password)">
+                            </div>
+                            <div class="form-group">
+                                <label for="cpassword" class="control-label">Current Password</label>
+                                <input type="password" name="cpassword" class="form-control form" value="" placeholder="(Enter value to change password)">
+                            </div>
+                            <div class="form-group d-flex justify-content-end">
+                                <button class="btn btn-dark btn-flat">Update</button>
+                            </div>
+                        </form>
+                    </div>
+            </div>
+        </div>
+    </div>
+</section>
