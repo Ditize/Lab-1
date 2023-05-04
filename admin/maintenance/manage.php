@@ -107,3 +107,52 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
             }
         })
     }
+    $(document).ready(function(){
+		$('.rem_img').click(function(){
+            _conf("Are sure to delete this image permanently?",'delete_img',["'"+$(this).attr('data-path')+"'"])
+        })
+		$('#package-form').submit(function(e){
+			e.preventDefault();
+			 $('.err-msg').remove();
+			start_loader();
+			$.ajax({
+				url:_base_url_+"classes/Master.php?f=save_package",
+				data: new FormData($(this)[0]),
+                cache: false,
+                contentType: false,
+                processData: false,
+                method: 'POST',
+                type: 'POST',
+                dataType: 'json',
+				error:err=>{
+					console.log(err)
+					alert_toast("An error occured",'error');
+					end_loader();
+				},
+				success:function(resp){
+					if(typeof resp =='object' && resp.status == 'success'){
+						location.href = "./?page=packages";
+					}else{
+						alert_toast("An error occured",'error');
+						end_loader();
+                        console.log(resp)
+					}
+				}
+			})
+		})
+
+        $('.summernote').summernote({
+		        height: 200,
+		        toolbar: [
+		            [ 'style', [ 'style' ] ],
+		            [ 'font', [ 'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear'] ],
+		            [ 'fontname', [ 'fontname' ] ],
+		            [ 'fontsize', [ 'fontsize' ] ],
+		            [ 'color', [ 'color' ] ],
+		            [ 'para', [ 'ol', 'ul', 'paragraph', 'height' ] ],
+		            [ 'table', [ 'table' ] ],
+		            [ 'view', [ 'undo', 'redo', 'fullscreen', 'codeview', 'help' ] ]
+		        ]
+		    })
+	})
+</script>
