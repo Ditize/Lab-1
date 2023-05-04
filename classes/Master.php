@@ -62,3 +62,60 @@ Class Master extends DBConnection {
 		return json_encode($resp);
 	}
 }
+function delete_category(){
+    extract($_POST);
+    $del = $this->conn->query("DELETE FROM `categories` where id = '{$id}'");
+    if($del){
+        $resp['status'] = 'success';
+        $this->settings->set_flashdata('success',"Category successfully deleted.");
+    }else{
+        $resp['status'] = 'failed';
+        $resp['error'] = $this->conn->error;
+    }
+    return json_encode($resp);
+
+}
+
+function delete_img(){
+    extract($_POST);
+    if(is_file($path)){
+        if(unlink($path)){
+            $resp['status'] = 'success';
+        }else{
+            $resp['status'] = 'failed';
+            $resp['error'] = 'failed to delete '.$path;
+        }
+    }else{
+        $resp['status'] = 'failed';
+        $resp['error'] = 'Unkown '.$path.' path';
+    }
+    return json_encode($resp);
+}
+
+function register(){
+    extract($_POST);
+    $data = "";
+    $_POST['password'] = md5($_POST['password']);
+    foreach($_POST as $k =>$v){
+        if(!in_array($k,array('id'))){
+            if(!empty($data)) $data .=",";
+            $data .= " `{$k}`='{$v}' ";
+        }
+    }
+    $check = $this->conn->query("SELECT * FROM `clients` where `email` = '{$email}' ".(!empty($id) ? " and id != {$id} " : "")." ")->num_rows;
+    if($this->capture_err())
+        return $this->capture_err();
+    if($check > 0){
+        $resp['status'] = 'failed';
+        $resp['msg'] = "Email already taken.";
+        return json_encode($resp);
+        exit;
+    }
+    if(empty($id)){
+        $sql = "INSERT INTO `clients` set {$data} ";
+        $save = $this->conn->query($sql);
+        $id = $this->conn->insert_id;
+    }else{
+        $sql = "UPDATE `clients` set {$data} where id = '{$id}' ";
+        $save = $this->conn->query($sql);
+    }
