@@ -55,3 +55,55 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
                     
                 
             ?>
+                <div class="d-flex w-100 align-items-center img-item">
+                    <span><img src="<?php echo base_url.$upload_path.'/'.$img ?>" width="150px" height="100px" style="object-fit:cover;" class="img-thumbnail" alt=""></span>
+                    <span class="ml-4"><button class="btn btn-sm btn-default text-danger rem_img" type="button" data-path="<?php echo base_app.$upload_path.'/'.$img ?>"><i class="fa fa-trash"></i></button></span>
+                </div>
+            <?php endforeach; ?>
+            <?php endif; ?>
+			
+		</form>
+	</div>
+	<div class="card-footer">
+		<button class="btn btn-flat btn-primary" form="package-form">Save</button>
+		<a class="btn btn-flat btn-default" href="?page=responses">Cancel</a>
+	</div>
+</div>
+<script>
+    function displayImg(input,_this) {
+        console.log(input.files)
+        var fnames = []
+        Object.keys(input.files).map(k=>{
+            fnames.push(input.files[k].name)
+        })
+        _this.siblings('.custom-file-label').html(JSON.stringify(fnames))
+	    
+	}
+    function delete_img($path){
+        start_loader()
+        
+        $.ajax({
+            url: _base_url_+'classes/Master.php?f=delete_p_img',
+            data:{path:$path},
+            method:'POST',
+            dataType:"json",
+            error:err=>{
+                console.log(err)
+                alert_toast("An error occured while deleting an Image","error");
+                end_loader()
+            },
+            success:function(resp){
+                $('.modal').modal('hide')
+                if(typeof resp =='object' && resp.status == 'success'){
+                    $('[data-path="'+$path+'"]').closest('.img-item').hide('slow',function(){
+                        $('[data-path="'+$path+'"]').closest('.img-item').remove()
+                    })
+                    alert_toast("Image Successfully Deleted","success");
+                }else{
+                    console.log(resp)
+                    alert_toast("An error occured while deleting an Image","error");
+                }
+                end_loader()
+            }
+        })
+    }
