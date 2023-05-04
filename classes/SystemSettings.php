@@ -1,16 +1,16 @@
 <?php
 if(!class_exists('DBConnection')){
-    require_once('../config.php');
-    require_once('DBConnection.php');
+	require_once('../config.php');
+	require_once('DBConnection.php');
 }
 class SystemSettings extends DBConnection{
-    public function __construct(){
+	public function __construct(){
 		parent::__construct();
 	}
-    function check_connection(){
-        return($this->conn);
-    }
-function load_system_info(){
+	function check_connection(){
+		return($this->conn);
+	}
+	function load_system_info(){
 		// if(!isset($_SESSION['system_info'])){
 			$sql = "SELECT * FROM system_info";
 			$qry = $this->conn->query($sql);
@@ -19,7 +19,7 @@ function load_system_info(){
 				}
 		// }
 	}
-function update_system_info(){
+	function update_system_info(){
 		$sql = "SELECT * FROM system_info";
 		$qry = $this->conn->query($sql);
 			while($row = $qry->fetch_assoc()){
@@ -28,7 +28,7 @@ function update_system_info(){
 			}
 		return true;
 	}
-function update_settings_info(){
+	function update_settings_info(){
 		$data = "";
 		foreach ($_POST as $key => $value) {
 			if(!in_array($key,array("about_us","privacy_policy")))
@@ -73,8 +73,7 @@ function update_settings_info(){
 			return true;
 		}
 	}
-
-    function set_userdata($field='',$value=''){
+	function set_userdata($field='',$value=''){
 		if(!empty($field) && !empty($value)){
 			$_SESSION['userdata'][$field]= $value;
 		}
@@ -102,8 +101,15 @@ function update_settings_info(){
 			return false;
 		}
 	}
-
-
+	function flashdata($flash = ''){
+		if(!empty($flash)){
+			$_tmp = $_SESSION['flashdata'][$flash];
+			unset($_SESSION['flashdata']);
+			return $_tmp;
+		}else{
+			return false;
+		}
+	}
 	function sess_des(){
 		if(isset($_SESSION['userdata'])){
 				unset($_SESSION['userdata']);
@@ -140,6 +146,3 @@ switch ($action) {
 		break;
 }
 ?>
-
-
-
