@@ -61,7 +61,6 @@ Class Master extends DBConnection {
 		}
 		return json_encode($resp);
 	}
-}
 function delete_category(){
     extract($_POST);
     $del = $this->conn->query("DELETE FROM `categories` where id = '{$id}'");
@@ -119,3 +118,90 @@ function register(){
         $sql = "UPDATE `clients` set {$data} where id = '{$id}' ";
         $save = $this->conn->query($sql);
     }
+	if($save){
+		$resp['status'] = 'success';
+		if(empty($id))
+			$this->settings->set_flashdata('success',"Account successfully created.");
+		else
+			$this->settings->set_flashdata('success',"Account successfully updated.");
+		foreach($_POST as $k =>$v){
+				$this->settings->set_userdata($k,$v);
+		}
+		$this->settings->set_userdata('id',$id);
+
+	}else{
+		$resp['status'] = 'failed';
+		$resp['err'] = $this->conn->error."[{$sql}]";
+	}
+	return json_encode($resp);
+}	
+function update_account(){
+	extract($_POST);
+	$data = "";
+	if(!empty($password)){
+		$_POST['password'] = md5($password);
+		if(md5($cpassword) != $this->settings->userdata('password')){
+			$resp['status'] = 'failed';
+			$resp['msg'] = "Current Password is Incorrect";
+			return json_encode($resp);
+			exit;
+		}
+
+	}
+	$check = $this->conn->query("SELECT * FROM `clients`  where `email`='{$email}' and `id` != $id ")->num_rows;
+	if($check > 0){
+		$resp['status'] = 'failed';
+		$resp['msg'] = "Email already taken.";
+		return json_encode($resp);
+		exit;
+	}
+	foreach($_POST as $k =>$v){
+		if($k == 'cpassword' || ($k == 'password' && empty($v)))
+			continue;
+			if(!empty($data)) $data .=",";
+				$data .= " `{$k}`='{$v}' ";
+	}
+	$save = $this->conn->query("UPDATE `clients` set $data where id = $id ");
+	if($save){
+		foreach($_POST as $k =>$v){
+			if($k != 'cpassword')
+			$this->settings->set_userdata($k,$v);
+		}
+		
+		$this->settings->set_userdata('id',$this->conn->insert_id);
+		$resp['status'] = 'success';
+	}else{
+		$resp['status'] = 'failed';
+		$resp['error'] = $this->conn->error;
+	}
+	return json_encode($resp);
+
+}
+}
+$Master = new Master();
+$action = !isset($_GET['f']) ? 'none' : strtolower($_GET['f']);
+$sysset = new SystemSettings();
+switch ($action) {
+case 'save_category':
+	echo $Master->save_category();
+break;
+case 'delete_category':
+	echo $Master->delete_category();
+break;
+
+case 'register':
+	echo $Master->register();
+break;
+
+case 'delete_img':
+	echo $Master->delete_img();
+break;
+
+case 'update_account':
+	echo $Master->update_account();
+break;
+
+default:
+	// echo $sysset->index();
+	break;
+}
