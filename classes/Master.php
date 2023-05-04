@@ -20,7 +20,7 @@ Class Master extends DBConnection {
 			exit;
 		}
 	}
-    function save_category(){
+	function save_category(){
 		extract($_POST);
 		$data = "";
 		foreach($_POST as $k =>$v){
@@ -33,6 +33,21 @@ Class Master extends DBConnection {
 			if(!empty($data)) $data .=",";
 				$data .= " `description`='".addslashes(htmlentities($description))."' ";
 		}
-        }
-    
-    }
+		$check = $this->conn->query("SELECT * FROM `categories` where `category` = '{$category}' ".(!empty($id) ? " and id != {$id} " : "")." ")->num_rows;
+		if($this->capture_err())
+			return $this->capture_err();
+		if($check > 0){
+			$resp['status'] = 'failed';
+			$resp['msg'] = "Category already exist.";
+			return json_encode($resp);
+			exit;
+		}
+		if(empty($id)){
+			$sql = "INSERT INTO `categories` set {$data} ";
+			$save = $this->conn->query($sql);
+		}else{
+			$sql = "UPDATE `categories` set {$data} where id = '{$id}' ";
+			$save = $this->conn->query($sql);
+		}
+		}
+	}
