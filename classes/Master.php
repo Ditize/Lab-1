@@ -49,5 +49,16 @@ Class Master extends DBConnection {
 			$sql = "UPDATE `categories` set {$data} where id = '{$id}' ";
 			$save = $this->conn->query($sql);
 		}
+		if($save){
+			$resp['status'] = 'success';
+			if(empty($id))
+				$this->settings->set_flashdata('success',"New Category successfully saved.");
+			else
+				$this->settings->set_flashdata('success',"Category successfully updated.");
+		}else{
+			$resp['status'] = 'failed';
+			$resp['err'] = $this->conn->error."[{$sql}]";
 		}
+		return json_encode($resp);
 	}
+}
