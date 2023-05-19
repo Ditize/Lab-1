@@ -91,3 +91,58 @@
 		</div>
 	</div>
 </div>
+<script>
+	$(document).ready(function(){
+		$('.delete_data').click(function(){
+			_conf("Are you sure to delete this order permanently?","delete_order",[$(this).attr('data-id')])
+		})
+		$('.pay_order').click(function(){
+			_conf("Are you sure to mark this order as paid?","pay_order",[$(this).attr('data-id')])
+		})
+		$('.table').dataTable();
+	})
+	function pay_order($id){
+		start_loader();
+		$.ajax({
+			url:_base_url_+"classes/Master.php?f=pay_order",
+			method:"POST",
+			data:{id: $id},
+			dataType:"json",
+			error:err=>{
+				console.log(err)
+				alert_toast("An error occured.",'error');
+				end_loader();
+			},
+			success:function(resp){
+				if(typeof resp== 'object' && resp.status == 'success'){
+					location.reload();
+				}else{
+					alert_toast("An error occured.",'error');
+					end_loader();
+				}
+			}
+		})
+	}
+	function delete_order($id){
+		start_loader();
+		$.ajax({
+			url:_base_url_+"classes/Master.php?f=delete_order",
+			method:"POST",
+			data:{id: $id},
+			dataType:"json",
+			error:err=>{
+				console.log(err)
+				alert_toast("An error occured.",'error');
+				end_loader();
+			},
+			success:function(resp){
+				if(typeof resp== 'object' && resp.status == 'success'){
+					location.reload();
+				}else{
+					alert_toast("An error occured.",'error');
+					end_loader();
+				}
+			}
+		})
+	}
+</script>
