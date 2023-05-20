@@ -70,3 +70,11 @@
 		</div>
 	</div>
 </div>
+<script>
+	$(document).ready(function(){
+		$('.delete_data').click(function(){
+			_conf("Are you sure to delete this inventory permanently?","delete_inventory",[$(this).attr('data-id')])
+		})
+		$('.table').dataTable();
+	})
+	</script>
