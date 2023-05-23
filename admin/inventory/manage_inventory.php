@@ -29,3 +29,14 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
                     <option value="<?php echo $row['id'] ?>" <?php echo isset($product_id) && $product_id == $row['id'] ? 'selected' : '' ?>><?php echo $row['title'] ?></option>
                     <?php endwhile; ?>
                 </select>
+                </div>
+            <div class="form-group">
+				<label for="quantity" class="control-label">Beginning Quanatity</label>
+                <input type="number" class="form-control form" required name="quantity" value="<?php echo isset($quantity) ? $quantity : '' ?>">
+            </div>
+            <div class="form-group">
+				<label for="price" class="control-label">Price</label>
+                <input type="number" step="any" class="form-control form" required name="price" value="<?php echo isset($price) ? $price : '' ?>">
+            </div>
+		</form>
+	</div>
