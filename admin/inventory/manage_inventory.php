@@ -19,4 +19,13 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
 				<label for="product_id" class="control-label">Product</label>
                 <select name="product_id" id="product_id" class="custom-select select2" required>
                     <option value=""></option>
+                    <?php
+                        $qry = $conn->query("SELECT * FROM `products` order by title asc");
+                        while($row= $qry->fetch_assoc()):
+                            foreach($row as $k=> $v){
+								$row[$k] = trim(stripslashes($v));
+							}
+                    ?>
+                    <option value="<?php echo $row['id'] ?>" <?php echo isset($product_id) && $product_id == $row['id'] ? 'selected' : '' ?>><?php echo $row['title'] ?></option>
+                    <?php endwhile; ?>
                 </select>
