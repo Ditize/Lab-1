@@ -153,4 +153,13 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
             $('#sub_category_id').select2({placeholder:"Please Select here",width:"relative"})
         })
     })
+    $('.select2').select2({placeholder:"Please Select here",width:"relative"})
+        if(parseInt("<?php echo isset($category_id) ? $category_id : 0 ?>") > 0){
+            console.log('test')
+            start_loader()
+            setTimeout(() => {
+                $('#category_id').trigger("change");
+                end_loader()
+            }, 750);
+        }
     </script>
