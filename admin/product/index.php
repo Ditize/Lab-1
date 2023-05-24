@@ -33,3 +33,43 @@
 					</tr>
 				</thead>
 				<tbody>
+                <?php 
+					$i = 1;
+						$qry = $conn->query("SELECT * from `products` order by unix_timestamp(date_created) desc ");
+						while($row = $qry->fetch_assoc()):
+							foreach($row as $k=> $v){
+								$row[$k] = trim(stripslashes($v));
+							}
+                            $row['description'] = strip_tags(stripslashes(html_entity_decode($row['description'])));
+					?>
+						<tr>
+							<td class="text-center"><?php echo $i++; ?></td>
+							<td><?php echo date("Y-m-d H:i",strtotime($row['date_created'])) ?></td>
+							<td><?php echo $row['title'] ?></td>
+							<td ><p class="m-0"><?php echo $row['author'] ?></p></td>
+							<td class="text-center">
+                                <?php if($row['status'] == 1): ?>
+                                    <span class="badge badge-success">Active</span>
+                                <?php else: ?>
+                                    <span class="badge badge-danger">Inactive</span>
+                                <?php endif; ?>
+                            </td>
+							<td align="center">
+								 <button type="button" class="btn btn-flat btn-default btn-sm dropdown-toggle dropdown-icon" data-toggle="dropdown">
+				                  		Action
+				                    <span class="sr-only">Toggle Dropdown</span>
+				                  </button>
+				                  <div class="dropdown-menu" role="menu">
+				                    <a class="dropdown-item" href="?page=product/manage_product&id=<?php echo $row['id'] ?>"><span class="fa fa-edit text-primary"></span> Edit</a>
+				                    <div class="dropdown-divider"></div>
+				                    <a class="dropdown-item delete_data" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>"><span class="fa fa-trash text-danger"></span> Delete</a>
+				                  </div>
+							</td>
+						</tr>
+					<?php endwhile; ?>
+				</tbody>
+			</table>
+		</div>
+		</div>
+	</div>
+</div>
