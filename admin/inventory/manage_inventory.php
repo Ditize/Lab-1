@@ -55,4 +55,33 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
         _this.siblings('.custom-file-label').html(JSON.stringify(fnames))
 	    
 	}
+    $(document).ready(function(){
+        $('.select2').select2({placeholder:"Please Select here",width:"relative"})
+		$('#inventory-form').submit(
+            {function(e){
+			e.preventDefault();
+            var _this = $(this)
+			 $('.err-msg').remove();
+			start_loader();
+			$.ajax({
+				url:_base_url_+"classes/Master.php?f=save_inventory",
+				data: new FormData($(this)[0]),
+                cache: false,
+                contentType: false,
+                processData: false,
+                method: 'POST',
+                type: 'POST',
+                dataType: 'json',
+				error:err=>{
+					console.log(err)
+					alert_toast("An error occured",'error');
+					end_loader();
+				},
+            }
+				}
+			})
+            })
+		    
+	
+
     </script>
