@@ -29,7 +29,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
                     <option value="<?php echo $row['id'] ?>" <?php echo isset($product_id) && $product_id == $row['id'] ? 'selected' : '' ?>><?php echo $row['title'] ?></option>
                     <?php endwhile; ?>
                 </select>
-                </div>
+			</div>
             <div class="form-group">
 				<label for="quantity" class="control-label">Beginning Quanatity</label>
                 <input type="number" class="form-control form" required name="quantity" value="<?php echo isset($quantity) ? $quantity : '' ?>">
@@ -40,3 +40,48 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
             </div>
 		</form>
 	</div>
+    <div class="card-footer">
+		<button class="btn btn-flat btn-primary" form="inventory-form">Save</button>
+		<a class="btn btn-flat btn-default" href="?page=inventory">Cancel</a>
+	</div>
+</div>
+<script>
+    function displayImg(input,_this) {
+        console.log(input.files)
+        var fnames = []
+        Object.keys(input.files).map(k=>{
+            fnames.push(input.files[k].name)
+        })
+        _this.siblings('.custom-file-label').html(JSON.stringify(fnames))
+	    
+	}
+    $(document).ready(function(){
+        $('.select2').select2({placeholder:"Please Select here",width:"relative"})
+		$('#inventory-form').submit(
+            {function(e){
+			e.preventDefault();
+            var _this = $(this)
+			 $('.err-msg').remove();
+			start_loader();
+			$.ajax({
+				url:_base_url_+"classes/Master.php?f=save_inventory",
+				data: new FormData($(this)[0]),
+                cache: false,
+                contentType: false,
+                processData: false,
+                method: 'POST',
+                type: 'POST',
+                dataType: 'json',
+				error:err=>{
+					console.log(err)
+					alert_toast("An error occured",'error');
+					end_loader();
+				},
+            }
+				}
+			})
+            })
+		    
+	
+
+    </script>
