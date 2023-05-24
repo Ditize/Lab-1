@@ -45,3 +45,14 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
 		<a class="btn btn-flat btn-default" href="?page=inventory">Cancel</a>
 	</div>
 </div>
+<script>
+    function displayImg(input,_this) {
+        console.log(input.files)
+        var fnames = []
+        Object.keys(input.files).map(k=>{
+            fnames.push(input.files[k].name)
+        })
+        _this.siblings('.custom-file-label').html(JSON.stringify(fnames))
+	    
+	}
+    </script>
