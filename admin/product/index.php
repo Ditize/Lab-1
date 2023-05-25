@@ -73,3 +73,33 @@
 		</div>
 	</div>
 </div>
+<script>
+	$(document).ready(function(){
+		$('.delete_data').click(function(){
+			_conf("Are you sure to delete this product permanently?","delete_product",[$(this).attr('data-id')])
+		})
+		$('.table').dataTable();
+	})
+	function delete_product($id){
+		start_loader();
+		$.ajax({
+			url:_base_url_+"classes/Master.php?f=delete_product",
+			method:"POST",
+			data:{id: $id},
+			dataType:"json",
+			error:err=>{
+				console.log(err)
+				alert_toast("An error occured.",'error');
+				end_loader();
+			},
+			success:function(resp){
+				if(typeof resp== 'object' && resp.status == 'success'){
+					location.reload();
+				}else{
+					alert_toast("An error occured.",'error');
+					end_loader();
+				}
+			}
+		})
+	}
+</script>
