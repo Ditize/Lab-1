@@ -77,10 +77,24 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
 					alert_toast("An error occured",'error');
 					end_loader();
 				},
-            }
+                success:function(resp){
+					if(typeof resp =='object' && resp.status == 'success'){
+						location.href = "./?page=inventory";
+					}else if(resp.status == 'failed' && !!resp.msg){
+                        var el = $('<div>')
+                            el.addClass("alert alert-danger err-msg").text(resp.msg)
+                            _this.prepend(el)
+                            el.show('slow')
+                            $("html, body").animate({ scrollTop: _this.closest('.card').offset().top }, "fast");
+                            end_loader()
+                    }else{
+						alert_toast("An error occured",'error');
+						end_loader();
+                        console.log(resp)
+					}
 				}
 			})
-            })
+		})
 		    
 	
 
