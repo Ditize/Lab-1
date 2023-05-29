@@ -152,7 +152,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
             $('#sub_category_id').html(opt)
             $('#sub_category_id').select2({placeholder:"Please Select here",width:"relative"})
         })
-    })
+   
     $('.select2').select2({placeholder:"Please Select here",width:"relative"})
         if(parseInt("<?php echo isset($category_id) ? $category_id : 0 ?>") > 0){
             console.log('test')
@@ -199,4 +199,18 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
 				}
 			})
 		})
+        $('.summernote').summernote({
+		        height: 200,
+		        toolbar: [
+		            [ 'style', [ 'style' ] ],
+		            [ 'font', [ 'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear'] ],
+		            [ 'fontname', [ 'fontname' ] ],
+		            [ 'fontsize', [ 'fontsize' ] ],
+		            [ 'color', [ 'color' ] ],
+		            [ 'para', [ 'ol', 'ul', 'paragraph', 'height' ] ],
+		            [ 'table', [ 'table' ] ],
+		            [ 'view', [ 'undo', 'redo', 'fullscreen', 'codeview', 'help' ] ]
+		        ]
+		    })
+        })
     </script>
