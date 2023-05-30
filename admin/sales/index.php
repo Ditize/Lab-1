@@ -89,3 +89,7 @@ $date_end = isset($_GET['date_end']) ? $_GET['date_end'] :  date("Y-m-d") ;
                     <?php endif; ?>
             
                     </tbody>
+                    </table>
+        </div>
+    </div>
+</div>
