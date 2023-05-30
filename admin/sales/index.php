@@ -72,5 +72,6 @@ $date_end = isset($_GET['date_end']) ? $_GET['date_end'] :  date("Y-m-d") ;
                             <p class="m-0"><?php echo $roww['title'] ?></p>
                             <p class="m-0"><small>By: <?php echo $roww['author'] ?></small></p>
                         </td>
+                </tr>
             
                     </tbody>
