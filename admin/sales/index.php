@@ -57,3 +57,13 @@ $date_end = isset($_GET['date_end']) ? $_GET['date_end'] :  date("Y-m-d") ;
                         <th>Amount</th>
                     </tr>
                 </thead>
+                <tbody>
+                    <?php 
+                    $i = 1;
+                        $qry = $conn->query("SELECT * FROM `sales` where date(date_created) between '{$date_start}' and '{$date_end}' order by unix_timestamp(date_created) desc ");
+                        while($row = $qry->fetch_assoc()):
+                            $olist = $conn->query("SELECT ol.*,p.title,p.author,concat(c.firstname,' ',c.lastname) as name,c.email,o.date_created FROM order_list ol inner join orders o on o.id = ol.order_id inner join `products` p on p.id = ol.product_id inner join clients c on c.id = o.client_id  where ol.order_id = '{$row['order_id']}' ");
+                            while($roww = $olist->fetch_assoc()):
+                    ?>
+            
+                    </boddy>
