@@ -65,6 +65,12 @@ $date_end = isset($_GET['date_end']) ? $_GET['date_end'] :  date("Y-m-d") ;
                             $olist = $conn->query("SELECT ol.*,p.title,p.author,concat(c.firstname,' ',c.lastname) as name,c.email,o.date_created FROM order_list ol inner join orders o on o.id = ol.order_id inner join `products` p on p.id = ol.product_id inner join clients c on c.id = o.client_id  where ol.order_id = '{$row['order_id']}' ");
                             while($roww = $olist->fetch_assoc()):
                     ?>
-                
+                <tr>
+                        <td class="text-center"><?php echo $i++ ?></td>
+                        <td><?php echo $row['date_created'] ?></td>
+                        <td>
+                            <p class="m-0"><?php echo $roww['title'] ?></p>
+                            <p class="m-0"><small>By: <?php echo $roww['author'] ?></small></p>
+                        </td>
             
                     </tbody>
