@@ -72,6 +72,20 @@ $date_end = isset($_GET['date_end']) ? $_GET['date_end'] :  date("Y-m-d") ;
                             <p class="m-0"><?php echo $roww['title'] ?></p>
                             <p class="m-0"><small>By: <?php echo $roww['author'] ?></small></p>
                         </td>
-                </tr>
+                        <td>
+                            <p class="m-0"><?php echo $roww['name'] ?></p>
+                            <p class="m-0"><small>Email: <?php echo $roww['email'] ?></small></p>
+                        </td>
+                        <td class="text-center"><?php echo $roww['quantity'] ?></td>
+                        <td class="text-right"><?php echo number_format($roww['quantity'] * $roww['price']) ?></td>
+                    </tr>
+                    <?php endwhile; ?>
+                    <?php endwhile; ?>
+                    <?php if($qry->num_rows <= 0): ?>
+                    <tr>
+                        <td class="text-center" colspan="6">No Data...</td>
+                    </tr>
+                
+
             
                     </tbody>
