@@ -21,3 +21,22 @@
                     </tr>
                 </thead>
                 <tbody>
+                <?php 
+                        $olist = $conn->query("SELECT o.*,p.title,p.author FROM order_list o inner join products p on o.product_id = p.id where o.order_id = '{$id}' ");
+                        while($row = $olist->fetch_assoc()):
+                        foreach($row as $k => $v){
+                            $row[$k] = trim(stripslashes($v));
+                        }
+                    ?>
+                    <tr>
+                        <td><?php echo $row['quantity'] ?></td>
+                        <td>
+                            <p class="m-0"><?php echo $row['title']?></p>
+                            <p class="m-0"><small>Author: <?php echo $row['author']?></small></p>
+                           
+                        </td>
+                        <td class="text-right"><?php echo number_format($row['price']) ?></td>
+                        <td class="text-right"><?php echo number_format($row['price'] * $row['quantity']) ?></td>
+                    </tr>
+                    <?php endwhile; ?>
+                </tbody>
