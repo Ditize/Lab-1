@@ -86,6 +86,6 @@ $date_end = isset($_GET['date_end']) ? $_GET['date_end'] :  date("Y-m-d") ;
                         <td class="text-center" colspan="6">No Data...</td>
                     </tr>
                 
-
+                    <?php endif; ?>
             
                     </tbody>
