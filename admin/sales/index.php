@@ -30,3 +30,30 @@ $date_end = isset($_GET['date_end']) ? $_GET['date_end'] :  date("Y-m-d") ;
                 </div>
             </div>
         </form>
+        <hr>
+        <div id="printable">
+            <div>
+                <h4 class="text-center m-0"><?php echo $_settings->info('name') ?></h4>
+                <h3 class="text-center m-0"><b>Sales Report</b></h3>
+                <p class="text-center m-0">Date Between <?php echo $date_start ?> and <?php echo $date_end ?></p>
+                <hr>
+            </div>
+            <table class="table table-bordered">
+                <colgroup>
+                    <col width="5">
+                    <col width="10">
+                    <col width="10">
+                    <col width="10">
+                    <col width="10">
+                    <col width="10">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Date Time</th>
+                        <th>Book</th>
+                        <th>Client</th>
+                        <th>QTY</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
