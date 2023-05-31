@@ -104,5 +104,21 @@ $date_end = isset($_GET['date_end']) ? $_GET['date_end'] :  date("Y-m-d") ;
         .text-right{
             text-align:right;
         }
+        .table{
+            border-collapse:collapse;
+            width: 100%
+        }
+        .table tr,.table td,.table th{
+            border:1px solid gray;
+        }
     </style>
 </noscript>
+<script>
+    $(function(){
+        $('#filter-form').submit(function(e){
+            e.preventDefault()
+            location.href = "./?page=sales&date_start="+$('[name="date_start"]').val()+"&date_end="+$('[name="date_end"]').val()
+        })
+    
+        })
+</script>
