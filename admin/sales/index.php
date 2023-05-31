@@ -93,3 +93,16 @@ $date_end = isset($_GET['date_end']) ? $_GET['date_end'] :  date("Y-m-d") ;
         </div>
     </div>
 </div>
+<noscript>
+    <style>
+        .m-0{
+            margin:0;
+        }
+        .text-center{
+            text-align:center;
+        }
+        .text-right{
+            text-align:right;
+        }
+    </style>
+</noscript>
