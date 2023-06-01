@@ -106,3 +106,31 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
         _this.siblings('.custom-file-label').html(JSON.stringify(fnames))
 	    
 	}
+    function delete_img($path){
+        start_loader()
+        
+        $.ajax({
+            url: _base_url_+'classes/Master.php?f=delete_img',
+            data:{path:$path},
+            method:'POST',
+            dataType:"json",
+            error:err=>{
+                console.log(err)
+                alert_toast("An error occured while deleting an Image","error");
+                end_loader()
+            },
+            success:function(resp){
+                $('.modal').modal('hide')
+                if(typeof resp =='object' && resp.status == 'success'){
+                    $('[data-path="'+$path+'"]').closest('.img-item').hide('slow',function(){
+                        $('[data-path="'+$path+'"]').closest('.img-item').remove()
+                    })
+                    alert_toast("Image Successfully Deleted","success");
+                }else{
+                    console.log(resp)
+                    alert_toast("An error occured while deleting an Image","error");
+                }
+                end_loader()
+            }
+        })
+    }
