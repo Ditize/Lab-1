@@ -57,3 +57,37 @@
             <div class="col-6 row row-cols-2">
                 <div class="col-3">Order Status:</div>
                 <div class="col-9">
+                <?php 
+                    switch($status){
+                        case '0':
+                            echo '<span class="badge badge-light text-dark">Pending</span>';
+	                    break;
+                        case '1':
+                            echo '<span class="badge badge-primary">Packed</span>';
+	                    break;
+                        case '2':
+                            echo '<span class="badge badge-warning">Out for Delivery</span>';
+	                    break;
+                        case '3':
+                            echo '<span class="badge badge-success">Delivered</span>';
+	                    break;
+                        case '5':
+                            echo '<span class="badge badge-success">Picked Up</span>';
+	                    break;
+                        default:
+                            echo '<span class="badge badge-danger">Cancelled</span>';
+	                    break;
+                    }
+                ?>
+                </div>
+                <?php if(!isset($_GET['view'])): ?>
+                <div class="col-3"></div>
+                <div class="col">
+                    <button type="button" id="update_status" class="btn btn-sm btn-flat btn-primary">Update Status</button>
+                </div>
+                <?php endif; ?>
+                
+            </div>
+        </div>
+    </div>
+</div>
