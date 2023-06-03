@@ -119,6 +119,18 @@ $date_end = isset($_GET['date_end']) ? $_GET['date_end'] :  date("Y-m-d") ;
             e.preventDefault()
             location.href = "./?page=sales&date_start="+$('[name="date_start"]').val()+"&date_end="+$('[name="date_end"]').val()
         })
+        
+        $('#printBTN').click(function(){
+            var rep = $('#printable').clone();
+            var ns = $('noscript').clone().html();
+            start_loader()
+            rep.prepend(ns)
+            var nw = window.document.open('','_blank','width=900,height=600')
+                nw.document.write(rep.html())
+                nw.document.close()
+                nw.print()
+               
+        })
     
         })
 </script>
