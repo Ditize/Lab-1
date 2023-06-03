@@ -134,3 +134,26 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
             }
         })
     }
+    var sub_categories = $.parseJSON('<?php echo json_encode($sub_categories) ?>');
+	$(document).ready(function(){
+        $('.rem_img').click(function(){
+            _conf("Are sure to delete this image permanently?",'delete_img',["'"+$(this).attr('data-path')+"'"])
+        })
+       
+        $('#category_id').change(function(){
+            var cid = $(this).val()
+            var opt = "<option></option>";
+            Object.keys(sub_categories).map(k=>{
+                if(k == cid){
+                    Object.keys(sub_categories[k]).map(i=>{
+                        if('<?php echo isset($sub_category_id) ? $sub_category_id : 0 ?>' == sub_categories[k][i].id){
+                            opt += "<option value='"+sub_categories[k][i].id+"' selected>"+sub_categories[k][i].sub_category+"</option>";
+                        }else{
+                            opt += "<option value='"+sub_categories[k][i].id+"'>"+sub_categories[k][i].sub_category+"</option>";
+                        }
+                    })
+                }
+            })
+            $('#sub_category_id').html(opt)
+            $('#sub_category_id').select2({placeholder:"Please Select here",width:"relative"})
+        })
