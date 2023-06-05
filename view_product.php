@@ -117,3 +117,54 @@
         </div>
     </div>
 </section>
+<script>
+    var inv = $.parseJSON('<?php echo json_encode($inv) ?>');
+    $(function(){
+        $('.view-image').click(function(){
+            var _img = $(this).find('img').attr('src');
+            $('#display-img').attr('src',_img);
+            $('.view-image').removeClass("active")
+            $(this).addClass("active")
+        })
+        $('.p-size').click(function(){
+            var k = $(this).attr('data-id');
+            $('.p-size').removeClass("active")
+            $(this).addClass("active")
+            $('#price').text(inv[k].price)
+            $('[name="price"]').val(inv[k].price)
+            $('#avail').text(inv[k].quantity)
+            $('[name="inventory_id"]').val(inv[k].id)
+
+        })
+
+        $('#add-cart').submit(function(e){
+            e.preventDefault();
+            if('<?php echo $_settings->userdata('id') ?>' <= 0){
+                uni_modal("","login.php");
+                return false;
+            }
+            start_loader();
+            $.ajax({
+                url:'classes/Master.php?f=add_to_cart',
+                data:$(this).serialize(),
+                method:'POST',
+                dataType:"json",
+                error:err=>{
+                    console.log(err)
+                    alert_toast("an error occured",'error')
+                    end_loader()
+                },
+                success:function(resp){
+                    if(typeof resp == 'object' && resp.status=='success'){
+                        alert_toast("Product added to cart.",'success')
+                        $('#cart-count').text(resp.cart_count)
+                    }else{
+                        console.log(resp)
+                        alert_toast("an error occured",'error')
+                    }
+                    end_loader();
+                }
+            })
+        })
+    })
+</script>
