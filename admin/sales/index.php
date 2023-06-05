@@ -129,7 +129,10 @@ $date_end = isset($_GET['date_end']) ? $_GET['date_end'] :  date("Y-m-d") ;
                 nw.document.write(rep.html())
                 nw.document.close()
                 nw.print()
-               
+                setTimeout(function(){
+                    nw.close()
+                    end_loader()
+                },500)
         })
     
         })
