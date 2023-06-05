@@ -21,6 +21,19 @@
                             $fileO = scandir($upload_path);
                             if(isset($fileO[2]))
                                 $img = "uploads/product_".$row['pid']."/".$fileO[2];
-            
+                            // var_dump($fileO);
                         }
                 ?>
+                    <div class="d-flex w-100 justify-content-between  mb-2 py-2 border-bottom cart-item">
+                        <div class="d-flex align-items-center col-8">
+                            <span class="mr-2"><a href="javascript:void(0)" class="btn btn-sm btn-outline-danger rem_item" data-id="<?php echo $row['id'] ?>"><i class="fa fa-trash"></i></a></span>
+                            <img src="<?php echo validate_image($img) ?>" loading="lazy" class="cart-prod-img mr-2 mr-sm-2" alt="">
+                            <div>
+                                <p class="mb-1 mb-sm-1"><?php echo $row['title'] ?></p>
+                                
+                                <p class="mb-1 mb-sm-1"><small><b>Price:</b> <span class="price"><?php echo number_format($row['price']) ?></span></small></p>
+                                <div>
+                                <div class="input-group" style="width:130px !important">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-sm btn-outline-secondary min-qty" type="button" id="button-addon1"><i class="fa fa-minus"></i></button>
+                                    </div>
