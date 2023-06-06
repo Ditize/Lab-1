@@ -61,3 +61,35 @@
         </div>
     </div>
 </section>
+<script>
+    function calc_total(){
+        var total  = 0
+
+        $('.total-amount').each(function(){
+            amount = $(this).text()
+            amount = amount.replace(/\,/g,'')
+            amount = parseFloat(amount)
+            total += amount
+        })
+        $('#grand-total').text(parseFloat(total).toLocaleString('en-US'))
+    }
+    function qty_change($type,_this){
+        var qty = _this.closest('.cart-item').find('.cart-qty').val()
+        var price = _this.closest('.cart-item').find('.price').text()
+            price = price.replace(/,/g,'')
+            console.log(price)
+        var cart_id = _this.closest('.cart-item').find('.cart-qty').attr('data-id')
+        var new_total = 0
+        start_loader();
+        if($type == 'minus'){
+            qty = parseInt(qty) - 1
+        }else{
+            qty = parseInt(qty) + 1
+        }
+        price = parseFloat(price)
+        // console.log(qty,price)
+        new_total = parseFloat(qty * price).toLocaleString('en-US')
+        _this.closest('.cart-item').find('.cart-qty').val(qty)
+        _this.closest('.cart-item').find('.total-amount').text(new_total)
+        calc_total()
+    }
