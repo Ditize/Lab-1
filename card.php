@@ -37,3 +37,27 @@
                                     <div class="input-group-prepend">
                                         <button class="btn btn-sm btn-outline-secondary min-qty" type="button" id="button-addon1"><i class="fa fa-minus"></i></button>
                                     </div>
+                                    <input type="number" class="form-control form-control-sm qty text-center cart-qty" placeholder="" aria-label="Example text with button addon" value="<?php echo $row['quantity'] ?>" aria-describedby="button-addon1" data-id="<?php echo $row['id'] ?>" readonly>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-sm btn-outline-secondary plus-qty" type="button" id="button-addon1"><i class="fa fa-plus"></i></button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col text-right align-items-center d-flex justify-content-end">
+                            <h4><b class="total-amount"><?php echo number_format($row['price'] * $row['quantity']) ?></b></h4>
+                        </div>
+                    </div>
+                <?php endwhile; ?>
+                <div class="d-flex w-100 justify-content-between mb-2 py-2 border-bottom">
+                    <div class="col-8 d-flex justify-content-end"><h4>Grand Total:</h4></div>
+                    <div class="col d-flex justify-content-end"><h4 id="grand-total">-</h4></div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex w-100 justify-content-end">
+            <a href="./?p=checkout" class="btn btn-sm btn-flat btn-dark">Checkout</a>
+        </div>
+    </div>
+</section>
