@@ -166,3 +166,20 @@
 
         })
     }
+    $(function(){
+        calc_total()
+        $('.min-qty').click(function(){
+            qty_change('minus',$(this))
+        })
+        $('.plus-qty').click(function(){
+            qty_change('plus',$(this))
+        })
+        $('#empty_cart').click(function(){
+            // empty_cart()
+            _conf("Are you sure to empty your cart list?",'empty_cart',[])
+        })
+        $('.rem_item').click(function(){
+            _conf("Are you sure to remove the item in cart list?",'rem_item',[$(this).attr('data-id')])
+        })
+    })
+</script>
