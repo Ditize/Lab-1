@@ -203,3 +203,19 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
 				}
 			})
 		})
+        
+        $('.summernote').summernote({
+		        height: 200,
+		        toolbar: [
+		            [ 'style', [ 'style' ] ],
+		            [ 'font', [ 'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear'] ],
+		            [ 'fontname', [ 'fontname' ] ],
+		            [ 'fontsize', [ 'fontsize' ] ],
+		            [ 'color', [ 'color' ] ],
+		            [ 'para', [ 'ol', 'ul', 'paragraph', 'height' ] ],
+		            [ 'table', [ 'table' ] ],
+		            [ 'view', [ 'undo', 'redo', 'fullscreen', 'codeview', 'help' ] ]
+		        ]
+		    })
+	})
+</script>
