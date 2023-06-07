@@ -87,7 +87,7 @@
             qty = parseInt(qty) + 1
         }
         price = parseFloat(price)
-        // console.log(qty,price)
+    
         new_total = parseFloat(qty * price).toLocaleString('en-US')
         _this.closest('.cart-item').find('.cart-qty').val(qty)
         _this.closest('.cart-item').find('.total-amount').text(new_total)
@@ -106,6 +106,58 @@
             success:function(resp){
                 if(!!resp.status && resp.status == 'success'){
                     end_loader()
+                }else{
+                    alert_toast("an error occured", 'error');
+                    end_loader()
+                }
+            }
+
+        })
+    }
+    function rem_item(id){
+        $('.modal').modal('hide')
+        var _this = $('.rem_item[data-id="'+id+'"]')
+        var id = _this.attr('data-id')
+        var item = _this.closest('.cart-item')
+        start_loader();
+        $.ajax({
+            url:'classes/Master.php?f=delete_cart',
+            method:'POST',
+            data:{id:id},
+            dataType:'json',
+            error:err=>{
+                console.log(err)
+                alert_toast("an error occured", 'error');
+                end_loader()
+            },
+            success:function(resp){
+                if(!!resp.status && resp.status == 'success'){
+                    item.hide('slow',function(){ item.remove() })
+                    calc_total()
+                    end_loader()
+                }else{
+                    alert_toast("an error occured", 'error');
+                    end_loader()
+                }
+            }
+
+        })
+    }
+    function empty_cart(){
+        start_loader();
+        $.ajax({
+            url:'classes/Master.php?f=empty_cart',
+            method:'POST',
+            data:{},
+            dataType:'json',
+            error:err=>{
+                console.log(err)
+                alert_toast("an error occured", 'error');
+                end_loader()
+            },
+            success:function(resp){
+                if(!!resp.status && resp.status == 'success'){
+                   location.reload()
                 }else{
                     alert_toast("an error occured", 'error');
                     end_loader()
