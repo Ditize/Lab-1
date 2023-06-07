@@ -92,4 +92,25 @@
         _this.closest('.cart-item').find('.cart-qty').val(qty)
         _this.closest('.cart-item').find('.total-amount').text(new_total)
         calc_total()
+    
+        $.ajax({
+            url:'classes/Master.php?f=update_cart_qty',
+            method:'POST',
+            data:{id:cart_id, quantity: qty},
+            dataType:'json',
+            error:err=>{
+                console.log(err)
+                alert_toast("an error occured", 'error');
+                end_loader()
+            },
+            success:function(resp){
+                if(!!resp.status && resp.status == 'success'){
+                    end_loader()
+                }else{
+                    alert_toast("an error occured", 'error');
+                    end_loader()
+                }
+            }
+
+        })
     }
