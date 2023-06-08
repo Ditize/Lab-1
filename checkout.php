@@ -52,3 +52,39 @@ $total = 0;
         </div>
     </div>
 </section>
+<script>
+paypal.Button.render({
+    env: 'sandbox',
+     // change for production if app is live,
+ 
+        //app's client id's
+	client: {
+        sandbox:    'AdDNu0ZwC3bqzdjiiQlmQ4BRJsOarwyMVD_L4YQPrQm4ASuBg4bV5ZoH-uveg8K_l9JLCmipuiKt4fxn',
+
+    },
+ 
+    commit: true,
+     // Show a 'Pay Now' button
+ 
+    style: {
+    	color: 'blue',
+    	size: 'small'
+    },
+ 
+    payment: function(data, actions) {
+        return actions.payment.create({
+            payment: {
+                transactions: [
+                    {
+                    	//total purchase
+                        amount: { 
+                        	total: '<?php echo $total; ?>', 
+                        	currency: 'PHP' 
+                        }
+                    }
+                ]
+            }
+        });
+    },
+    
+</script>
