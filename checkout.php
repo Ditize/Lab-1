@@ -86,5 +86,19 @@ paypal.Button.render({
             }
         });
     },
-    
+    onAuthorize: function(data, actions) {
+        return actions.payment.execute().then(function(payment) {
+    		// //sweetalert for successful transaction
+    		// swal('Thank you!', 'Paypal purchase successful.', 'success');
+            payment_online()
+        });
+    },
+ 
+}, '#paypal-button');
+
+function payment_online(){
+    $('[name="payment_method"]').val("Online Payment")
+    $('[name="paid"]').val(1)
+    $('#place_order').submit()
+}
 </script>
