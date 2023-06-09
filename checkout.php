@@ -101,4 +101,28 @@ function payment_online(){
     $('[name="paid"]').val(1)
     $('#place_order').submit()
 }
+$(function(){
+    $('[name="order_type"]').change(function(){
+        if($(this).val() ==2){
+            $('.address-holder').hide('slow')
+        }else{
+            $('.address-holder').show('slow')
+        }
+    })
+    $('#place_order').submit(function(e){
+        e.preventDefault()
+        start_loader();
+        $.ajax({
+            url:'classes/Master.php?f=place_order',
+            method:'POST',
+            data:$(this).serialize(),
+            dataType:"json",
+            error:err=>{
+                console.log(err)
+                alert_toast("an error occured","error")
+                end_loader();
+            },
+        })
+    })
+})
 </script>
