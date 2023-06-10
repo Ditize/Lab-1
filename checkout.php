@@ -122,6 +122,18 @@ $(function(){
                 alert_toast("an error occured","error")
                 end_loader();
             },
+            success:function(resp){
+                if(!!resp.status && resp.status == 'success'){
+                    alert_toast("Order Successfully placed.","success")
+                    setTimeout(function(){
+                        location.replace('./')
+                    },2000)
+                }else{
+                    console.log(resp)
+                    alert_toast("an error occured","error")
+                    end_loader();
+                }
+            }
         })
     })
 })
