@@ -1,3 +1,4 @@
+
 <section class="py-5">
     <div class="container">
         <div class="row">
@@ -87,12 +88,12 @@
             qty = parseInt(qty) + 1
         }
         price = parseFloat(price)
-    
+        // console.log(qty,price)
         new_total = parseFloat(qty * price).toLocaleString('en-US')
         _this.closest('.cart-item').find('.cart-qty').val(qty)
         _this.closest('.cart-item').find('.total-amount').text(new_total)
         calc_total()
-    
+
         $.ajax({
             url:'classes/Master.php?f=update_cart_qty',
             method:'POST',
