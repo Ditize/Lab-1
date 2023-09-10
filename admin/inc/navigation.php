@@ -63,6 +63,23 @@
                         </p>
                       </a>
                     </li>
+                    <li class="nav-header">Books for children</li>
+                    <li class="nav-item dropdown">
+                      <a href="<?php echo base_url ?>admin/?page=Books for children/category" class="nav-link nav-Books for children/category">
+                        <i class="nav-icon fas fa-th-list"></i>
+                        <p>
+                        Category List
+                        </p>
+                      </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a href="<?php echo base_url ?>admin/?page=Books for children/sub_category" class="nav-link nav-Books for children/sub_category">
+                        <i class="nav-icon fas fa-th-list"></i>
+                        <p>
+                        Sub Category List
+                        </p>
+                      </a>
+                    </li>
                     <li class="nav-header">Maintenance</li>
                     <li class="nav-item dropdown">
                       <a href="<?php echo base_url ?>admin/?page=maintenance/category" class="nav-link nav-maintenance/category">
