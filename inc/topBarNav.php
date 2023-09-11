@@ -42,10 +42,39 @@
                         <?php endif; ?>
                         <?php endwhile; ?>
                         <?php if($count_cats > 3): ?>
-                        <li class="nav-item"><a class="nav-link" href="./?p=view_categories">All Categories</a></li>
+                       
+                    </ul>
+                     <!-- Per kategorin e re -->
+                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                        <?php 
+                        
+                        $cat_qry = $conn->query("SELECT * FROM bookCh where status = 1  limit 3");
+                        $count_cats =$conn->query("SELECT * FROM bookCh where status = 1 ")->num_rows;
+                        while($crow = $cat_qry->fetch_assoc()):
+                          $sub_qry = $conn->query("SELECT * FROM sub_bookCh where status = 1 and parent_id = '{$crow['id']}'");
+                          if($sub_qry->num_rows <= 0):
+                    
+    
+                        ?>
+                        <li class="nav-item"><a class="nav-link" aria-current="page" href="./?p=products&c=<?php echo md5($crow['id']) ?>"><?php echo $crow['category'] ?></a></li>
+                        <?php else: ?>
+                        <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" id="navbarDropdown<?php echo $crow['id'] ?>" href="#" role="button" data-toggle="dropdown" aria-expanded="false"><?php echo $crow['category'] ?></a></a>
+                            <ul class="dropdown-menu  p-0" aria-labelledby="navbarDropdown<?php echo $crow['id'] ?>">
+                              <?php while($srow = $sub_qry->fetch_assoc()): ?>
+                                <li><a class="dropdown-item border-bottom" href="./?p=products&c=<?php echo md5($crow['id']) ?>&s=<?php echo md5($srow['id']) ?>"><?php echo $srow['sub_category'] ?></a></li>
+                                <?php endwhile; ?>
+                            </ul>
+                        </li>
+                        <?php endif; ?>
+                        <?php endwhile; ?>
+                        <?php if($count_cats > 3): ?>
+                          <li class="nav-item"><a class="nav-link" href="./?p=view_categories">All Categories</a></li>
                         <?php endif; ?>
                         <li class="nav-item"><a class="nav-link" href="./?p=about">About</a></li>
                     </ul>
+                 <!-- Fund-->
                     <div class="d-flex align-items-center">
                       <?php if(!isset($_SESSION['userdata']['id'])): ?>
                         <button class="btn btn-outline-dark ml-2" id="login-btn" type="button">Login</button>
