@@ -20,6 +20,65 @@ Class Master extends DBConnection {
 			exit;
 		}
 	}
+
+
+	function save_categor(){
+		extract($_POST);
+		$data = "";
+		foreach($_POST as $k =>$v){
+			if(!in_array($k,array('id','description'))){
+				if(!empty($data)) $data .=",";
+				$data .= " `{$k}`='{$v}' ";
+			}
+		}
+		if(isset($_POST['description'])){
+			if(!empty($data)) $data .=",";
+				$data .= " `description`='".addslashes(htmlentities($description))."' ";
+		}
+		$check = $this->conn->query("SELECT * FROM `bookch` where `category` = '{$category}' ".(!empty($id) ? " and id != {$id} " : "")." ")->num_rows;
+		if($this->capture_err())
+			return $this->capture_err();
+		if($check > 0){
+			$resp['status'] = 'failed';
+			$resp['msg'] = "Books for children already exist.";
+			return json_encode($resp);
+			exit;
+		}
+		if(empty($id)){
+			$sql = "INSERT INTO `bookch` set {$data} ";
+			$save = $this->conn->query($sql);
+		}else{
+			$sql = "UPDATE `bookch` set {$data} where id = '{$id}' ";
+			$save = $this->conn->query($sql);
+		}
+		if($save){
+			$resp['status'] = 'success';
+			if(empty($id))
+				$this->settings->set_flashdata('success',"New Books for children successfully saved.");
+			else
+				$this->settings->set_flashdata('success',"Books for children  successfully updated.");
+		}else{
+			$resp['status'] = 'failed';
+			$resp['err'] = $this->conn->error."[{$sql}]";
+		}
+		return json_encode($resp);
+	}
+	function delete_categor(){
+		extract($_POST);
+		$del = $this->conn->query("DELETE FROM `bookch` where id = '{$id}'");
+		if($del){
+			$resp['status'] = 'success';
+			$this->settings->set_flashdata('success',"Books for children  successfully deleted.");
+		}else{
+			$resp['status'] = 'failed';
+			$resp['error'] = $this->conn->error;
+		}
+		return json_encode($resp);
+
+	}
+
+
+
 	function save_category(){
 		extract($_POST);
 		$data = "";
@@ -74,7 +133,7 @@ Class Master extends DBConnection {
 		return json_encode($resp);
 
 	}
-	function save_sub_category(){
+    function save_sub_category(){
 		extract($_POST);
 		$data = "";
 		foreach($_POST as $k =>$v){
@@ -121,6 +180,60 @@ Class Master extends DBConnection {
 		if($del){
 			$resp['status'] = 'success';
 			$this->settings->set_flashdata('success',"Sub Category successfully deleted.");
+		}else{
+			$resp['status'] = 'failed';
+			$resp['error'] = $this->conn->error;
+		}
+		return json_encode($resp);
+
+	}
+	function save_sub_categor(){
+		extract($_POST);
+		$data = "";
+		foreach($_POST as $k =>$v){
+			if(!in_array($k,array('id','description'))){
+				if(!empty($data)) $data .=",";
+				$data .= " `{$k}`='{$v}' ";
+			}
+		}
+		if(isset($_POST['description'])){
+			if(!empty($data)) $data .=",";
+				$data .= " `description`='".addslashes(htmlentities($description))."' ";
+		}
+		$check = $this->conn->query("SELECT * FROM `sub_bookch` where `sub_category` = '{$sub_category}' ".(!empty($id) ? " and id != {$id} " : "")." ")->num_rows;
+		if($this->capture_err())
+			return $this->capture_err();
+		if($check > 0){
+			$resp['status'] = 'failed';
+			$resp['msg'] = "Sub Books for children already exist.";
+			return json_encode($resp);
+			exit;
+		}
+		if(empty($id)){
+			$sql = "INSERT INTO `sub_bookch` set {$data} ";
+			$save = $this->conn->query($sql);
+		}else{
+			$sql = "UPDATE `sub_bookch` set {$data} where id = '{$id}' ";
+			$save = $this->conn->query($sql);
+		}
+		if($save){
+			$resp['status'] = 'success';
+			if(empty($id))
+				$this->settings->set_flashdata('success',"New Sub Books for children successfully saved.");
+			else
+				$this->settings->set_flashdata('success',"Sub Books for children successfully updated.");
+		}else{
+			$resp['status'] = 'failed';
+			$resp['err'] = $this->conn->error."[{$sql}]";
+		}
+		return json_encode($resp);
+	}
+	function delete_sub_categor(){
+		extract($_POST);
+		$del = $this->conn->query("DELETE FROM `sub_bookch` where id = '{$id}'");
+		if($del){
+			$resp['status'] = 'success';
+			$this->settings->set_flashdata('success',"Sub Books for children successfully deleted.");
 		}else{
 			$resp['status'] = 'failed';
 			$resp['error'] = $this->conn->error;
@@ -518,12 +631,42 @@ switch ($action) {
 	case 'delete_category':
 		echo $Master->delete_category();
 	break;
+
+
+	case 'save_categor':
+		echo $Master->save_categor();
+	break;
+	case 'delete_categor':
+		echo $Master->delete_categor();
+	break;
+
+
+
 	case 'save_sub_category':
 		echo $Master->save_sub_category();
 	break;
 	case 'delete_sub_category':
 		echo $Master->delete_sub_category();
 	break;
+
+
+	case 'save_sub_categor':
+		echo $Master->save_sub_categor();
+	break;
+	case 'delete_sub_categor':
+		echo $Master->delete_sub_categor();
+	break;
+
+
+
+
+
+
+
+
+
+
+
 	case 'save_product':
 		echo $Master->save_product();
 	break;
